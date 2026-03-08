@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الإنجاز - ALENJAZ</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --burgundy:      #7a1a1a;
+    --burgundy-dark: #5c1010;
+    --gold:          #c9a84c;
+    --gold-light:    #dfc07a;
+    --white:         #ffffff;
+    --text-muted:    rgba(255,255,255,0.65);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background: var(--burgundy-dark);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+  }
+
+  /* Photo side */
+  .hero-photo {
+    position: relative;
+    background: linear-gradient(160deg,#9e9d8e,#6e6d60);
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-photo::after {
+    content:''; position:absolute; inset:0;
+    background: linear-gradient(to left, transparent 55%, var(--burgundy-dark) 100%);
+  }
+  .photo-hint {
+    color:rgba(255,255,255,.15); font-size:.8rem;
+    letter-spacing:.12em; z-index:1; text-align:center; padding:1rem;
+  }
+
+  /* Content side */
+  .hero-content {
+    position: relative; z-index:2;
+    background: linear-gradient(175deg, var(--burgundy-dark) 0%, var(--burgundy) 45%, var(--burgundy-dark) 100%);
+    display: flex; flex-direction:column; align-items:center; justify-content:center;
+    padding: 3rem 2.5rem; gap: 1.8rem;
+  }
+  .hero-content::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  /* ══ LOGO ══ */
+  .logo-wrap {
+    display:flex; flex-direction:column; align-items:center; gap:.5rem;
+    animation: fadeDown .8s ease both;
+  }
+  .logo-svg { width:165px; height:165px; }
+
+  /* ══ DIVIDER ══ */
+  .divider {
+    width:80%; height:1px;
+    background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
+    opacity:.45;
+  }
+
+  /* ══ TITLE ══ */
+  .section-title { text-align:center; animation: fadeDown .8s .15s ease both; }
+  .section-title h1 { font-size:2.6rem; font-weight:700; line-height:1.25; }
+  .section-title h1 span { color: var(--gold); }
+
+  /* ══ SOCIAL ══ */
+  .social-list {
+    width:100%; display:flex; flex-direction:column; gap:.65rem;
+    animation: fadeUp .8s .3s ease both;
+  }
+  .social-item {
+    display:flex; align-items:center; justify-content:space-between;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(201,168,76,.2);
+    border-radius:14px; padding:.85rem 1.2rem;
+    text-decoration:none; color:var(--white);
+    transition:all .3s; position:relative; overflow:hidden;
+  }
+  .social-item:hover {
+    border-color:var(--gold); background:rgba(201,168,76,.07);
+    transform:translateX(-4px);
+  }
+  .social-left { display:flex; align-items:center; gap:.85rem; }
+  .sicon {
+    width:44px; height:44px; border-radius:11px;
+    background:var(--gold);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    transition:transform .3s;
+  }
+  .social-item:hover .sicon { transform:scale(1.1) rotate(-5deg); }
+  .sicon svg { width:22px; height:22px; fill:var(--burgundy-dark); }
+  .sinfo { text-align:right; }
+  .sname { font-size:1rem; font-weight:700; display:block; }
+  .ssub  { font-size:.72rem; color:var(--gold-light); font-family:'Playfair Display',serif; font-style:italic; }
+  .sarr  { color:var(--gold); font-size:1.1rem; opacity:.6; transition:opacity .3s; }
+  .social-item:hover .sarr { opacity:1; }
+
+  /* ══ CONTACT SECTION ══ */
+  .contact-section {
+    padding:4rem 1.5rem 3rem;
+    max-width:680px; margin:0 auto;
+    animation: fadeUp .8s .5s ease both;
+  }
+  .contact-header { text-align:center; margin-bottom:2.5rem; }
+  .contact-header h2 {
+    font-size:2rem; font-weight:700; color:var(--gold);
+    display:inline-block; position:relative;
+  }
+  .contact-header h2::after {
+    content:''; display:block; margin:.4rem auto 0;
+    width:60%; height:2px;
+    background: linear-gradient(90deg,transparent,var(--gold),transparent);
+  }
+
+  /* ══ BRANCH CARDS ══ */
+  .branches { display:flex; flex-direction:column; gap:1rem; }
+  .branch-card {
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(201,168,76,.2);
+    border-radius:16px; padding:1.2rem 1.4rem;
+    transition:all .3s;
+  }
+  .branch-card:hover {
+    border-color:var(--gold); background:rgba(201,168,76,.06);
+    box-shadow:0 6px 22px rgba(0,0,0,.25);
+  }
+  .branch-top {
+    display:flex; align-items:center; gap:1rem; margin-bottom:1rem;
+  }
+  .bicon {
+    width:46px; height:46px; border-radius:11px;
+    background:var(--gold);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .bicon svg { width:22px; height:22px; fill:var(--burgundy-dark); }
+  .binfo { flex:1; }
+  .bname { font-size:1rem; font-weight:700; color:var(--gold-light); display:block; margin-bottom:.15rem; }
+  .bnum  { font-size:.88rem; color:var(--white); direction:ltr; display:block; }
+  .branch-btns { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+  .bbtn {
+    display:flex; align-items:center; justify-content:center; gap:.5rem;
+    padding:.65rem 1rem; border-radius:10px;
+    font-family:'Tajawal',sans-serif; font-size:.88rem; font-weight:700;
+    text-decoration:none; transition:all .25s;
+  }
+  .bbtn svg { width:18px; height:18px; flex-shrink:0; }
+  .bbtn-wa  { background:rgba(37,211,102,.12); border:1px solid rgba(37,211,102,.3); color:#25d366; }
+  .bbtn-wa svg { fill:#25d366; }
+  .bbtn-wa:hover  { background:rgba(37,211,102,.22); border-color:#25d366; }
+  .bbtn-map { background:rgba(201,168,76,.1); border:1px solid rgba(201,168,76,.3); color:var(--gold-light); }
+  .bbtn-map svg { fill:var(--gold-light); }
+  .bbtn-map:hover { background:rgba(201,168,76,.2); border-color:var(--gold); }
+
+  /* ══ FOOTER ══ */
+  footer {
+    text-align:center; padding:2rem 1rem;
+    border-top:1px solid rgba(201,168,76,.15);
+    color:rgba(255,255,255,.3); font-size:.8rem;
+  }
+  footer span { color:var(--gold); }
+
+  @keyframes fadeDown { from{opacity:0;transform:translateY(-18px)} to{opacity:1;transform:none} }
+  @keyframes fadeUp   { from{opacity:0;transform:translateY(18px)}  to{opacity:1;transform:none} }
+
+  @media(max-width:768px){
+    .hero { grid-template-columns:1fr; }
+    .hero-photo { height:260px; }
+    .hero-photo::after { background:linear-gradient(to top,var(--burgundy-dark) 0%,transparent 55%); }
+    .hero-content { padding:2rem 1.2rem; }
+    .section-title h1 { font-size:2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="hero-photo">
+    <p class="photo-hint">[ صورة الموديل ]</p>
+  </div>
+
+  <div class="hero-content">
+
+    <!-- LOGO — SVG matches brand: spool + thread + cloud frame -->
+    <div class="logo-wrap">
+      <svg class="logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+
+        <!-- Background fill -->
+        <path d="M100,28 C120,26 142,31 152,48 C166,46 179,57 178,72 C191,79 193,98 182,107 C187,122 178,137 163,141 C161,156 146,167 131,165 C122,178 107,182 95,175 C83,182 68,178 61,165 C46,167 31,156 31,141 C16,137 7,122 12,107 C1,98 3,79 16,72 C15,57 28,46 42,48 C52,31 80,26 100,28Z"
+              fill="#7a1a1a" stroke="#c9a84c" stroke-width="2.5" filter="url(#glow)"/>
+
+        <!-- Outer ring hint -->
+        <circle cx="100" cy="106" r="82" fill="none" stroke="#c9a84c" stroke-width=".8" stroke-dasharray="3 4" opacity=".3"/>
+
+        <!-- Thread spool (top right) -->
+        <ellipse cx="150" cy="50" rx="15" ry="7" fill="#c9a84c"/>
+        <rect x="135" y="50" width="30" height="20" rx="3" fill="#c9a84c" opacity=".85"/>
+        <ellipse cx="150" cy="70" rx="15" ry="7" fill="#c9a84c"/>
+        <ellipse cx="150" cy="60" rx="8" ry="10" fill="#5c1010"/>
+        <!-- Thread curve -->
+        <path d="M135,50 Q116,36 108,50 Q101,62 110,78" stroke="#e8c96a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+
+        <!-- Arabic name -->
+        <text x="100" y="115"
+              text-anchor="middle"
+              fill="#c9a84c"
+              font-size="29"
+              font-family="Tajawal,sans-serif"
+              font-weight="800"
+              filter="url(#glow)">الإنجاز</text>
+
+        <!-- ALENJAZ arc -->
+        <path id="arc" d="M 46,142 A 58,58 0 0,0 154,142" fill="none"/>
+        <text font-size="10.5" font-family="'Playfair Display',serif" font-style="italic" fill="#dfc07a" letter-spacing="4">
+          <textPath href="#arc" startOffset="50%" text-anchor="middle">ALENJAZ</textPath>
+        </text>
+
+        <!-- Decorative dots -->
+        <circle cx="55" cy="82" r="2" fill="#c9a84c" opacity=".45"/>
+        <circle cx="59" cy="94" r="1.5" fill="#c9a84c" opacity=".35"/>
+        <circle cx="146" cy="94" r="2" fill="#c9a84c" opacity=".45"/>
+      </svg>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-title">
+      <h1>تواصل<br><span>معنا</span></h1>
+    </div>
+
+    <div class="social-list">
+
+      <a href="https://wa.me/966530555842" class="social-item" target="_blank">
+        <div class="social-left">
+          <div class="sicon"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+          <div class="sinfo"><span class="sname">واتساب</span><span class="ssub">WhatsApp</span></div>
+        </div>
+        <span class="sarr">←</span>
+      </a>
+
+      <a href="https://facebook.com/alenjaz" class="social-item" target="_blank">
+        <div class="social-left">
+          <div class="sicon"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+          <div class="sinfo"><span class="sname">فيسبوك</span><span class="ssub">Facebook</span></div>
+        </div>
+        <span class="sarr">←</span>
+      </a>
+
+      <a href="https://x.com/alenjaz" class="social-item" target="_blank">
+        <div class="social-left">
+          <div class="sicon"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
+          <div class="sinfo"><span class="sname">منصة إكس</span><span class="ssub">X (Twitter)</span></div>
+        </div>
+        <span class="sarr">←</span>
+      </a>
+
+      <a href="https://instagram.com/alenjaz" class="social-item" target="_blank">
+        <div class="social-left">
+          <div class="sicon"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+          <div class="sinfo"><span class="sname">إنستقرام</span><span class="ssub">Instagram</span></div>
+        </div>
+        <span class="sarr">←</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / BRANCHES -->
+<section class="contact-section">
+  <div class="contact-header"><h2>تواصل معنا — الفروع</h2></div>
+
+  <div class="branches">
+
+    <!-- فرع المزروعية -->
+    <div class="branch-card">
+      <div class="branch-top">
+        <div class="bicon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+        <div class="binfo">
+          <span class="bname">الإنجاز — فرع المزروعية</span>
+          <span class="bnum">+966 53 0555 842</span>
+        </div>
+      </div>
+      <div class="branch-btns">
+        <a href="https://wa.me/966530555842" class="bbtn bbtn-wa" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          واتساب
+        </a>
+        <a href="https://maps.app.goo.gl/Wwxwwj1BmgyV2mhz7" class="bbtn bbtn-map" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          الموقع
+        </a>
+      </div>
+    </div>
+
+    <!-- فرع العدامه -->
+    <div class="branch-card">
+      <div class="branch-top">
+        <div class="bicon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+        <div class="binfo">
+          <span class="bname">الإنجاز — فرع العدامه</span>
+          <span class="bnum">+966 53 164 4123</span>
+        </div>
+      </div>
+      <div class="branch-btns">
+        <a href="https://wa.me/966531644123" class="bbtn bbtn-wa" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          واتساب
+        </a>
+        <a href="https://maps.app.goo.gl/1mQ52KpCjmanC5Ck8" class="bbtn bbtn-map" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          الموقع
+        </a>
+      </div>
+    </div>
+
+    <!-- فرع المنار -->
+    <div class="branch-card">
+      <div class="branch-top">
+        <div class="bicon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+        <div class="binfo">
+          <span class="bname">الإنجاز — فرع المنار</span>
+          <span class="bnum">+966 53 3400 866</span>
+        </div>
+      </div>
+      <div class="branch-btns">
+        <a href="https://wa.me/966533400866" class="bbtn bbtn-wa" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          واتساب
+        </a>
+        <a href="https://maps.app.goo.gl/ZEAxKPZgMXV7X4qp9" class="bbtn bbtn-map" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          الموقع
+        </a>
+      </div>
+    </div>
+
+    <!-- فرع الجامعيين -->
+    <div class="branch-card">
+      <div class="branch-top">
+        <div class="bicon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+        <div class="binfo">
+          <span class="bname">الإنجاز — فرع الجامعيين</span>
+          <span class="bnum">+966 50 0244 208</span>
+        </div>
+      </div>
+      <div class="branch-btns">
+        <a href="https://wa.me/966500244208" class="bbtn bbtn-wa" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          واتساب
+        </a>
+        <a href="https://maps.app.goo.gl/wfdBeWFuG9pL3pbC6" class="bbtn bbtn-map" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          الموقع
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <span>الإنجاز · ALENJAZ</span> — جميع الحقوق محفوظة</p>
+</footer>
+
+</body>
+</html>
