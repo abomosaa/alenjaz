@@ -17,6 +17,8 @@
 ## التقنيات المستخدمة (Tech Stack)
 - **Frontend:** Angular[cite: 1]
 - **Styling:** CSS / HTML / Responsive Design
-
 ---
-<img width="1763" height="1478" alt="image" src="https://github.com/user-attachments/assets/045f4f87-62e3-4d17-9546-ef5a5dfe65da" />
+https://abomosaa.github.io/alenjaz/
+---
+<img width="492" height="2033" alt="image" src="https://github.com/user-attachments/assets/c0cb90b9-7c28-460e-8e19-abb4ef03cf46" />
+
